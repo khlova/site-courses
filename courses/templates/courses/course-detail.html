@@ -8,7 +8,7 @@
             {% if object.img %} <!-- Если кортинка есть, то мы выводим её, если нет, то по умолчанию -->
             <img src = "{{ object.img.url }}" alt = "{{ object.title }}">
             {% else %}
-            <img src = "/pictures/default.jpg" alt = "{{ object.title }}">
+            <img src = "pictures/default.jpg" alt = "{{ object.title }}">
             {% endif %}
         </div>
 
