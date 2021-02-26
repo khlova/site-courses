@@ -1,0 +1,47 @@
+{% extends 'courses/main-layout.html' %} <!--Пишем что наследуем всё от главного шаблона-->
+
+{% block main_section %} <!-- Говорим, что встраеваем всё в этот блок-->
+    <div class="container mt-5">
+        <h2>{{ title }}</h2>
+                {% if user.is_authenticated == False or user.profile.account_type == "Бесплатный пакет" %}
+        <p>У нас на сайте вы можете приобрести полную подписку на сайте,
+            что предоставит доступ ко всем курса сайта.</p>
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Бесплатный</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">0 <small class="text-muted">рублей</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Бесплатные курсы</li>
+                  <li>Тех-поддержка</li>
+                  <li>Консультации</li>
+                  <li>Домашние работы</li>
+                </ul>
+                <a href="{% url 'reg' %}" class="btn btn-lg btn-block btn-outline-primary">Зарегистрироваться</a>
+              </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Полный</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">1500 <small class="text-muted">рублей</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Полностью все курсы</li>
+                  <li>Улучшенная тех-поддержка</li>
+                  <li>Консультации</li>
+                  <li>Домашние работы</li>
+                </ul>
+                <a href="{{ url }}" class="btn btn-lg btn-block btn-primary">Приобрести</a>
+              </div>
+            </div>
+          </div>
+        {% else %}
+        <p>У вас куплена максимальная подписка</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'courses/main-layout.html' %}
+{% load crispy_forms_tags %}
+{% block main_section %}
+  <div class="form-section container">
+    <h2>Добавление нового курса</h2>
+    <!-- Не забудьте к форме прописать enctype="multipart/form-data".
+      Иначе добавление фото не сработает корректно! -->
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <br>
+      <button type="submit" class="btn btn-outline-danger">Добавить</button>
+    </form>
+  </div>
+{% endblock main_section %}

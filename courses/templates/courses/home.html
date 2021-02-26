@@ -1,0 +1,22 @@
+{% extends 'courses/main-layout.html' %} <!--Пишем что наследуем всё от главного шаблона-->
+
+{% block main_section %} <!-- Говорим, что встраеваем всё в этот блок-->
+    <div class="courses">
+        
+    {% for course in courses %} <!--Перебираем переменную courses (имя объекта), которую передавали в html шаблон в файле views.py -->
+        <div class="course">
+            <h3>{{ course.title }}</h3>
+
+            {% if course.img %} <!-- Если кортинка есть, то мы выводим её, если нет, то по умолчанию -->
+            <img src = "{{ course.img.url }}" alt = "{{ course.title }}">
+            {% else %}
+            <img src = "/pictures/default.jpg" alt = "{{ course.title }}">
+            {% endif %}
+
+            <a href = "{{ course.get_absolute_url }}" class="btn btn-warning mt-3">Посмотреть</a>
+        </div>
+
+    {% endfor %}
+    </div>
+
+{% endblock %}

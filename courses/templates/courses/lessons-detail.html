@@ -1,0 +1,54 @@
+{% extends 'courses/main-layout.html' %} <!--Пишем что наследуем всё от главного шаблона-->
+
+{% block main_section %} <!-- Говорим, что встраеваем всё в этот блок-->
+    <div class="main-block">
+        <div class="one-course">
+            <h3>{{ object.title }}</h3> <!-- В объекте будет храниться вся информация о конкретном курсе-->
+
+            {% if object.img %} <!-- Если кортинка есть, то мы выводим её, если нет, то по умолчанию -->
+            <img src = "{{ object.img.url }}" alt = "{{ object.title }}">
+            {% else %}
+            <img src = "/pictures/default.jpg" alt = "{{ object.title }}">
+            {% endif %}
+        </div>
+
+        <div class="aside-course">
+            <h3>Видео урок - {{ title }}</h3>
+            <p>{{ desc }}</p>
+            {% if object.free == True %}
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            {% elif user.is_authenticated == False %}
+                <p><a href="{% url 'reg' %}">Зарегистрируйтесь</a> на сайте и купите подписку, чтобы просмотреть этот курс</p>
+            {% elif user.profile.account_type == "Бесплатный пакет" %}
+                <p>Необходимо купить <a href="{% url 'tarrifs' %}">подписку</a> на сайте, чтобы просмотреть этот курс</p>
+            {% else %}
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{video}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="container">
+            <h1>Оставьте свой коментарий:</h1>
+            {% load crispy_forms_tags %}
+            <form method="post">
+                {% csrf_token %}
+                <!-- Отображение всей формы-->
+                {{ commForm|crispy }}
+                <button type="submit" class="btn btn-danger">Добавить</button>
+            </form>
+            <br>
+            <h1>Коментарии пользователей:</h1>
+            <!-- Отображение всех комментариев -->
+            {% for comm in comments %}
+                <div class="alert alert-warning">
+                    <p><b>Текст сообщения:</b></p>
+                    <p>{{ comm.message }}</p>
+                    <p><b>Автор:</b> {{ comm.user }}</p>
+                </div>
+
+            {% endfor %}
+        </div>
+
+{% endblock %}

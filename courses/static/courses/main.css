@@ -1,0 +1,33 @@
+body {
+    background: #d8e5e8;
+}
+
+.courses, .main-block {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 80%;
+    margin: 100px 10%;
+}
+
+.courses .course {
+    width: 30%;
+}
+
+.courses .course img {width: 100%}
+
+.main-block {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.one-course {margin-right: 100px}
+
+.one-course img {width: 425px}
+
+footer {
+    width: 80%;
+    margin-left: 10%;
+}
+

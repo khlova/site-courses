@@ -1,0 +1,42 @@
+{% extends 'courses/main-layout.html' %} <!--Пишем что наследуем всё от главного шаблона-->
+
+{% block main_section %} <!-- Говорим, что встраеваем всё в этот блок-->
+    <div class="main-block">
+        <div class="one-course">
+            <h3>{{ object.title }}</h3> <!-- В объекте будет храниться вся информация о конкретном курсе-->
+
+            {% if object.img %} <!-- Если кортинка есть, то мы выводим её, если нет, то по умолчанию -->
+            <img src = "{{ object.img.url }}" alt = "{{ object.title }}">
+            {% else %}
+            <img src = "/pictures/default.jpg" alt = "{{ object.title }}">
+            {% endif %}
+        </div>
+
+        <div class="aside-course">
+            <h3>Описание курса</h3>
+            <p>{{ object.description }}</p>
+            {% if object.free == True %} <!--Если курс бесплатный то нам не важно авторизован пользователь или есть ли у него подписка-->
+                <ul>
+                {% for lesson in lessons %}
+                    <li><a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                {% if object.free == False and user.is_authenticated == False %} <!--Если курс бесплатный и пользователь авторизован, то отображаем-->
+                    <p><a href="{% url 'reg' %}">Зарегистрируйтесь</a> на сайте и купите подписку, чтобы просмотреть этот курс</p>
+                {% else %}
+                    {% if user.profile.account_type == "Полный пакет" %} <!--Проверяем, что помимо авторизации у пользователя должен быть платный тип подписки-->
+                        <ul>
+                        {% for lesson in lessons %}
+                            <li><a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Необходимо купить <a href="{% url 'tarrifs' %}">подписку</a> на сайте, чтобы просмотреть этот курс</p>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

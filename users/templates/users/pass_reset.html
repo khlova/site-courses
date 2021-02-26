@@ -1,0 +1,16 @@
+{% extends 'courses/main-layout.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Востановление пароля
+{% endblock %}
+
+{% block main_section %}
+<div class="container">
+    <h1>Востановление пароля</h1>
+    <form method="post" class="form-register auth">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-danger" type="submit">Запрос на новый пароль</button>
+    </form>
+</div>
+{% endblock %}
