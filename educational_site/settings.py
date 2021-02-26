@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '@m)6-k$q(#=*@(ui%w7pjw7_$fsn4+(u)z^kh=mns^vp-c$-7j'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['site-courses-django.herokuapp.com']
 
