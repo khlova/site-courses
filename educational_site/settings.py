@@ -5,8 +5,6 @@ import django_heroku
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '@m)6-k$q(#=*@(ui%w7pjw7_$fsn4+(u)z^kh=mns^vp-c$-7j'
-
 DEBUG = True
 
 ALLOWED_HOSTS = ['site-courses-django.herokuapp.com']
